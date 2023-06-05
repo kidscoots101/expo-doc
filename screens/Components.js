@@ -9,15 +9,16 @@ import {
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Components from "./screens/Components";
-import Api from "./screens/Api";
 import { StatusBar } from "expo-status-bar";
-import Activity_Indicator from "./components/ActivityIndicator";
 
-const HomeScreen = ({ navigation }) => {
+const Components = ({ navigation }) => {
   const PAGES = [
-    { id: 1, name: "Components" },
-    { id: 2, name: "APIs" },
+    { id: 1, name: "ActivityIndicator" },
+    { id: 2, name: "Button" },
+    { id: 3, name: "Flatlist" },
+    { id: 4, name: "Image" },
+    { id: 5, name: "ImageBackground" },
+    { id: 6, name: "Modal" },
   ];
 
   const renderItem = ({ item, index }) => {
@@ -49,8 +50,8 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const handleNavigation = (name) => {
-    if (name === "Components") {
-      navigation.navigate("Components");
+    if (name === "ActivityIndicator") {
+      navigation.navigate("ActivityIndicator");
     } else if (name === "APIs") {
       navigation.navigate("APIs");
     }
@@ -58,35 +59,14 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView>
-      <Text style={{ padding: 20, fontWeight: "bold", fontSize: 40 }}>
-        React Native
-      </Text>
       <FlatList
+        style={{ marginTop: 30 }}
         data={PAGES}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
       />
       <StatusBar style="auto" />
     </SafeAreaView>
-  );
-};
-
-const Stack = createStackNavigator();
-
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Components" component={Components} />
-        <Stack.Screen name="APIs" component={Api} />
-        <Stack.Screen name="ActivityIndicator" component={Activity_Indicator} />
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 };
 
@@ -107,4 +87,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-export default App;
+export default Components;
